@@ -1,0 +1,199 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telegram Security Scanner</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        background: #050505;
+        color: #00ff66;
+        font-family: Consolas, monospace;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .terminal {
+        width: 90%;
+        max-width: 850px;
+        background: #090909;
+        border: 1px solid #00ff66;
+        box-shadow: 0 0 30px rgba(0,255,100,.25);
+        padding: 25px;
+        border-radius: 10px;
+    }
+
+    .top {
+        color: white;
+        border-bottom: 1px solid #222;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        color: #00aaff;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    #console {
+        min-height: 350px;
+        line-height: 1.7;
+        white-space: pre-wrap;
+    }
+
+    .progress {
+        width: 100%;
+        height: 22px;
+        border: 1px solid #00ff66;
+        margin-top: 20px;
+    }
+
+    #bar {
+        width: 0%;
+        height: 100%;
+        background: #00ff66;
+        box-shadow: 0 0 15px #00ff66;
+        transition: width .15s;
+    }
+
+    #percent {
+        margin-top: 8px;
+        text-align: right;
+    }
+
+    .warning {
+        display: none;
+        text-align: center;
+        color: #ff3333;
+        font-size: 32px;
+        font-weight: bold;
+        margin-top: 25px;
+        animation: blink .7s infinite;
+    }
+
+    @keyframes blink {
+        50% { opacity: .3; }
+    }
+
+    .sub {
+        color: #777;
+        font-size: 12px;
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="terminal">
+
+    <div class="top">
+        <div class="title">TELEGRAM SECURITY SYSTEM</div>
+        <div>Advanced Account Diagnostic v4.7.2</div>
+    </div>
+
+    <div id="console"></div>
+
+    <div class="progress">
+        <div id="bar"></div>
+    </div>
+
+    <div id="percent">0%</div>
+
+    <div id="warning">
+        ⚠ ACCESS SIMULATION COMPLETE ⚠
+        <br><br>
+        
+    </div>
+
+    <div class="sub">
+        Educational simulation — no data is collected or transmitted.
+    </div>
+
+</div>
+
+<script>
+
+const consoleBox = document.getElementById("console");
+const bar = document.getElementById("bar");
+const percent = document.getElementById("percent");
+const warning = document.getElementById("warning");
+
+const messages = [
+    "[SYSTEM] Initializing security scanner...",
+    "[SYSTEM] Connecting to Telegram security module...",
+    "[INFO] Checking account parameters...",
+    "[SCAN] Searching active sessions...",
+    "[SCAN] Checking authorization status...",
+    "[SCAN] Analyzing security configuration...",
+    "[SCAN] Checking encrypted channels...",
+    "[SYSTEM] Generating diagnostic report...",
+    "[WARNING] Suspicious activity detected...",
+    "[SYSTEM] Finalizing scan..."
+];
+
+let progress = 0;
+let messageIndex = 0;
+
+function addMessage(text) {
+    consoleBox.innerHTML += text + "\n";
+    consoleBox.scrollTop = consoleBox.scrollHeight;
+}
+
+function runScan() {
+
+    addMessage(">>> STARTING SECURITY DIAGNOSTIC");
+    addMessage("");
+
+    const interval = setInterval(() => {
+
+        progress += Math.floor(Math.random() * 4) + 1;
+
+        if (progress > 100) {
+            progress = 100;
+        }
+
+        bar.style.width = progress + "%";
+        percent.textContent = progress + "%";
+
+        if (
+            progress > messageIndex * 9 &&
+            messageIndex < messages.length
+        ) {
+            addMessage(messages[messageIndex]);
+            messageIndex++;
+        }
+
+        if (progress >= 100) {
+            clearInterval(interval);
+
+            setTimeout(() => {
+                addMessage("");
+                addMessage("[SYSTEM] Diagnostic finished.");
+                addMessage("[RESULT] No real account access performed.");
+                addMessage("[RESULT] No data collected.");
+
+                warning.style.display = "block";
+            }, 700);
+        }
+
+    }, 120);
+}
+
+setTimeout(runScan, 1000);
+
+</script>
+
+</body>
+</html>
+```
